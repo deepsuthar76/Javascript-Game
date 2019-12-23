@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reaction Tester</title>
+	<style type="text/css">
+		#shape{
+
+			height: 200px;
+			width: 200px;
+			background-color: red;
+			margin: 50px;
+			display: block;
+			position: relative;
+		
+		
+		}
+	</style>
+</head>
+<body>
+
+	<h1>Test Your Reaction!</h1>
+	<h4>Click On the Boxes and Circles as quickly as you can.</h4>
+
+	<p><b> Your time : </b><span id="time"></span></p>
+
+	<div id="shape"></div>
+
+	<script type="text/javascript">
+
+
+		var start = new Date().getTime();
+
+		function getRandomColor() 
+		{
+ 		 var letters = '0123456789ABCDEF';
+  		 var color = '#';
+  			for (var i = 0; i < 6; i++)
+  			 {
+    			color += letters[Math.floor(Math.random() * 16)];
+  			}
+  		return color;
+		}
+
+		function shapeReaction(){
+
+
+			if (Math.random() > 0.5) {
+
+				document.getElementById("shape").style.borderRadius = "50%";
+			}
+			else{
+
+				document.getElementById("shape").style.borderRadius = "0";	
+			}
+
+			document.getElementById("shape").style.backgroundColor = getRandomColor();
+			document.getElementById("shape").style.top = Math.random()*400+"px";
+			document.getElementById("shape").style.right = Math.random()*400+"px";
+			document.getElementById("shape").style.bottom = Math.random()*400+"px";
+			document.getElementById("shape").style.left = Math.random()*400+"px";
+			document.getElementById("shape").style.width = Math.random()*400+"px";
+			document.getElementById("shape").style.height = Math.random()*400+"px";
+
+			document.getElementById("shape").style.display = "block";
+
+			start = new Date().getTime();
+		}
+
+		function shapeAppear(){
+
+			setTimeout(shapeReaction , Math.random()*500);
+		}
+
+		shapeAppear();
+
+		document.getElementById("shape").onclick = function(){
+
+			document.getElementById("shape").style.display ="none";
+
+			var end = new Date().getTime();
+
+			var timetaken = (end - start)/1000;
+
+			document.getElementById("time").innerHTML = "<strong>" + timetaken + "</strong>" +  "s"
+
+			shapeAppear();
+
+		}
+		
+	</script>
+		
+</body>
+</html>
